@@ -37,5 +37,5 @@ app.on('window-all-closed', () => {
 
 ipcMain.handle(CONSTS.HELLO_TO_MAIN, (event, message) => {
   console.log(message);
-  BrowserWindow.getFocusedWindow()?.webContents.send(CONSTS.HELLO_TO_RENDERER, 'Hello from main');
+  event.sender.send(CONSTS.HELLO_TO_RENDERER, 'Hello from main');
 });
