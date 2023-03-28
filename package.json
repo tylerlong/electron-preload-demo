@@ -1,0 +1,63 @@
+{
+  "name": "untitled-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An untitled app.",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Mac Mate",
+    "email": "support@macmate.app"
+  },
+  "main": "build/electron.js",
+  "scripts": {
+    "build": "rm -rf build && parcel build",
+    "lint": "eslint --fix '**/*.{ts,tsx,js,jsx}' && prettier --write . && sort-package-json",
+    "pack:mac": "yarn build && rm -rf dist && yarn electron-builder --universal --dir --config electron-builder.ts -c.mac.identity=null",
+    "start": "nodemon --watch build/electron.js --exec 'electron .'",
+    "watch": "ts-node scripts/watch.ts"
+  },
+  "devDependencies": {
+    "@tylerlong/use-proxy": "^1.2.8",
+    "@types/node": "^18.15.10",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
+    "antd": "^5.3.2",
+    "electron": "^23.2.0",
+    "electron-builder": "^24.1.1",
+    "eslint": "^8.36.0",
+    "eslint-config-alloy": "^4.9.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.22",
+    "parcel": "^2.8.3",
+    "prettier": "^2.8.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "shell-commands": "^0.1.2",
+    "sort-package-json": "^2.4.1",
+    "ts-node": "^10.9.1",
+    "ttpt": "^0.5.1",
+    "typescript": "^5.0.2",
+    "yarn-upgrade-all": "^0.7.2"
+  },
+  "productName": "Untitled App",
+  "targets": {
+    "electron": {
+      "source": "src/electron.ts",
+      "context": "electron-main",
+      "distDir": "build"
+    },
+    "preload": {
+      "source": "src/preload.ts",
+      "context": "node",
+      "distDir": "build"
+    },
+    "web": {
+      "source": "src/index.html",
+      "context": "browser",
+      "distDir": "build",
+      "publicUrl": "."
+    }
+  }
+}
