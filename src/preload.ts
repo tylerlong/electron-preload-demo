@@ -1,8 +1,11 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import CONSTS from './constants';
 
-contextBridge.exposeInMainWorld('electronAPI', {
-  hello: (name: string) => ipcRenderer.invoke(CONSTS.HELLO_TO_MAIN, name),
+contextBridge.exposeInMainWorld('ipcRenderer', {
+  invoke: (channel: string, ...args: any[]) => ipcRenderer.invoke(channel, ...args),
+  on: (channel: string, listener: (...args: any[]) => void) => {
+    ipcRenderer.on(channel, listener);
+    return () => ipcRenderer.removeListener(channel, listener);
+  },
 });
 
 window.addEventListener('DOMContentLoaded', () => {

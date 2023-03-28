@@ -35,6 +35,7 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.handle(CONSTS.HELLO_TO_MAIN, (event, name) => {
-  console.log('Hello from render', name);
+ipcMain.handle(CONSTS.HELLO_TO_MAIN, (event, message) => {
+  console.log(message);
+  BrowserWindow.getFocusedWindow()?.webContents.send(CONSTS.HELLO_TO_RENDERER, 'Hello from main');
 });

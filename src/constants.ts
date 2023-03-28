@@ -1,5 +1,6 @@
 const CONSTS = {
   HELLO_TO_MAIN: 'HELLO_TO_MAIN',
+  HELLO_TO_RENDERER: 'HELLO_TO_RENDERER',
 };
 
 export default CONSTS;
