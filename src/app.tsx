@@ -9,7 +9,7 @@ const { Text, Title } = Typography;
 
 const App = (props: { store: Store }) => {
   useEffect(() => {
-    const removeListner = global.ipcRenderer.on(CONSTS.HELLO_TO_RENDERER, (event: any, args: any) => {
+    const removeListner = global.ipc.on(CONSTS.HELLO_TO_WEB, (event: any, args: any) => {
       console.log(args);
     });
     return () => {
@@ -37,7 +37,7 @@ const App = (props: { store: Store }) => {
           >
             +
           </Button>
-          <Button onClick={() => global.ipcRenderer.invoke(CONSTS.HELLO_TO_MAIN, 'Hello from renderer')}>Hello</Button>
+          <Button onClick={() => global.ipc.invoke(CONSTS.HELLO_TO_ELECTRON, 'Hello from renderer')}>Hello</Button>
         </Space>
       </>
     );

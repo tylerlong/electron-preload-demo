@@ -35,7 +35,7 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.handle(CONSTS.HELLO_TO_MAIN, (event, message) => {
+ipcMain.handle(CONSTS.HELLO_TO_ELECTRON, (event, message) => {
   console.log(message);
-  event.sender.send(CONSTS.HELLO_TO_RENDERER, 'Hello from main');
+  event.sender.send(CONSTS.HELLO_TO_WEB, 'Hello from main');
 });
